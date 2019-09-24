@@ -1,0 +1,24 @@
+[2010-06-11] Chj:
+
+The NQuireSvrDemo is a TCP/UDP server that does the following:
+* Reads bpmap.txt to get the mapping between a barcode and a product description(product for short).
+* Listen to TCP connection/UDP datagrams from NQuire, receive barcodes(delimited by LF(0x0A)) from NQuire.
+* For every barcode received, the server checks if a barcode maps to a product. If yes, it sends the product description to NQuire(via TCP/UDP data) so that NQuire display the product description on its LCD screen.
+* Use a * character in bpmap.txt to represent any non-matching barcode. By this way, you can customize the text displayed instead of the hard-coded "No such product!" in the program.
+
+Some hints:
+* To fine control the display effect on NQuire LCD, you can use some control commands. Refer to "NQuire command set table" section in NQuire user manual.
+* Special byte assignment in bpmap.txt
+** To assign the ESC byte(it is only one TCP/UDP byte with value 0x1B), use <ESC> for this byte.
+** To assign the 0x03 TCP/UDP byte, use <03> for this byte. 
+** To assign the 0x80 TCP/UDP byte, use <80> for this byte. 
+** Nothing more special.
+* When NQuire's "Font codepage=ibm852", byte 0x80 represents the Euro symbol.
+* This server is a concurrent server, that is, it can accept multiple connections at the same time.
+* When running the server, its first parameter tells which port to listen on, which should match the port configured in NQuire. More server parameter help can be shown by running the server without a parameter.
+
+Prerequisites:
+* In order to use this server, your NQuire should do prior configuration as follows:
+  1. Act in TCP client mode or UDP client mode instead of server mode.
+  2. Configure correct "remote IP address" to which NQuire will connect(i.e. the machine this server runs on), and the TCP or UDP port should match the server listening port.
+
