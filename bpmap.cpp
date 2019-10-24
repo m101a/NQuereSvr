@@ -190,14 +190,14 @@ CProductList::GetProductByBarcode(const char *barcode)
 	}
 	
 	
-	// Сергей. Весовой код?
+	// РЎРµСЂРіРµР№. Р’РµСЃРѕРІРѕР№ РєРѕРґ?
 	if (strlen(barcode) == 13)
 	{
 		CString sBarcode = barcode;
 		if (sBarcode.GetAt(0) == '2')
 		{
-			// может быть весовой код
-			CString sSubCode = sBarcode.Left(7); // 21AAAAA
+			// РјРѕР¶РµС‚ Р±С‹С‚СЊ СЌС‚Рѕ РІРµСЃРѕРІРѕР№ РєРѕРґ
+			CString sSubCode = sBarcode.Left(7); // РЁР°Р±Р»РѕРЅ РІРµСЃРѕРІРѕРіРѕ РєРѕРґР° 21AAAAA
 			sSubCode = sSubCode.Right(5);
 
 
